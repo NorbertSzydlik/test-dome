@@ -1,0 +1,11 @@
+{
+  "name": "test-dome",
+  "version": "0.0.1-alpha1",
+  "description": "Test dome allows you to create testing environment, separated from real HTTP, SQL, socket connection, or filesystem manipulation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Norbert Szydlik",
+  "license": "ISC"
+}
