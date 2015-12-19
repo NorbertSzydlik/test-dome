@@ -1,6 +1,6 @@
 {
   "name": "test-dome",
-  "version": "0.0.1-alpha1",
+  "version": "0.0.1-alpha2",
   "description": "Test dome allows you to create testing environment, separated from real HTTP, socket connection, filesystem or childProcess",
   "main": "index.js",
   "scripts": {
