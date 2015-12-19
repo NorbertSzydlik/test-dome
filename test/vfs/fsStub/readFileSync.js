@@ -6,7 +6,7 @@ describe("fsStub", function() {
         expect(vfs.fsStub).to.respondTo("readFileSync");
     });
     describe("readFileSync", function() {
-        it("should use vfs instead of real fs", function() {
+        it("should read from file in vfs", function() {
             var testData = new Buffer("test data");
             vfs.prepareEnvironment({
                 vfs: {
