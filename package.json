@@ -8,6 +8,10 @@
   },
   "author": "Norbert Szydlik",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kefaise/test-dome.git"
+  },
   "devDependencies": {
     "chai": "^3.4.1",
     "gulp": "^3.9.0",
