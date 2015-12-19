@@ -7,6 +7,20 @@ describe("testDome", function() {
         expect(testDome).to.respondTo("enclose");
     });
     describe("enclose", function() {
+        it("should call vfs.prepareEnvironment with options", function() {
+            var options = {
+                enabled: {
+                    vfs: true
+                }
+            };
+            var vfsMock = sinon.mock(testDome.vfs);
+            vfsMock.expects("prepareEnvironment").once().withArgs(options);
+
+            var stubModule = testDome.enclose("./fixtures/stubModule", options);
+
+            vfsMock.restore();
+            vfsMock.verify();
+        });
         it("should mimic fs module if options.enabled.vfs is true", function() {
             var vfsMock = sinon.mock(testDome.vfs.fsStub);
             vfsMock.expects("readFileSync").once().withArgs("/tmp/file.txt");
