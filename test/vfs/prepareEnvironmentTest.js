@@ -17,7 +17,7 @@ describe("Virtual file system", function() {
                 }
             });
 
-            expect(vfs.getDataOfFile("/tmp/test1.txt")).to.equal("TestData string");
+            expect(vfs.getDataOfFile("/tmp/test1.txt", "utf8")).to.equal("TestData string");
         });
         it("allows to create initial content of files using array buffer", function() {
             vfs.prepareEnvironment({
@@ -45,9 +45,9 @@ describe("Virtual file system", function() {
                 }
             });
 
-            expect(vfs.getDataOfFile("/tmp/test1.txt")).to.equal("this is string");
-            expect(vfs.getDataOfFile("/tmp/test2.txt")).to.equal("this is buffer");
-            expect(vfs.getDataOfFile("/tmp/test3.txt")).to.equal("this is mixed buffer & string");
+            expect(vfs.getDataOfFile("/tmp/test1.txt", "utf8")).to.equal("this is string");
+            expect(vfs.getDataOfFile("/tmp/test2.txt", "utf8")).to.equal("this is buffer");
+            expect(vfs.getDataOfFile("/tmp/test3.txt", "utf8")).to.equal("this is mixed buffer & string");
         });
         it("should cleanup environment when used second time", function() {
             vfs.prepareEnvironment({

@@ -46,7 +46,12 @@ function getDataOfFile(absolutePath, encoding) {
     if(!_.has(vfs, absolutePath)) {
         assert.fail(null, null, 'Path "' + absolutePath + '" does not exist in virtual file system');
     }
-    return vfs[absolutePath].data.toString(encoding);
+    if(encoding != null) {
+        return vfs[absolutePath].data.toString(encoding);
+    } else {
+        return  vfs[absolutePath].data;
+    }
+
 }
 
 module.exports.prepareEnvironment = prepareEnvironment;
