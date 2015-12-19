@@ -9,8 +9,10 @@ function prepareEnvironment(options, pVfs) {
 
 module.exports.prepareEnvironment = prepareEnvironment;
 
-function readFileSync() {
-
+function readFileSync(file) {
+    if(_.has(vfs, file)) {
+        return vfs[file].data;
+    }
 }
 
 module.exports.stub = {};
