@@ -3,7 +3,7 @@
 var _ = require("lodash");
 var assert = require("assert");
 
-var fs = {};
+var vfs = {};
 
 function getBufferFromData(data) {
     if(Buffer.isBuffer(data)) {
@@ -20,22 +20,26 @@ function getBufferFromData(data) {
     }
 }
 
-function startEnvironment(options) {
-    if(_.has(options, "fs")) {
-        _.forEach(options.fs, function(file, absolutePath) {
-            fs[absolutePath] = {};
-            var storedFile = fs[absolutePath];
+function prepareEnvironment(options) {
+    if(_.has(options, "vfs")) {
+        _.forEach(options.vfs, function(file, absolutePath) {
+            vfs[absolutePath] = {};
+            var storedFile = vfs[absolutePath];
             storedFile.data = getBufferFromData(file.data);
         });
     }
 }
 
 function getDataOfFile(absolutePath, encoding) {
-    if(!_.has(fs, absolutePath)) {
+    if(!_.has(vfs, absolutePath)) {
         assert.fail(null, null, 'Path "' + absolutePath + '" does not exist in virtual file system');
     }
-    return fs[absolutePath].data.toString(encoding);
+    return vfs[absolutePath].data.toString(encoding);
 }
 
-module.exports.startEnvironment = startEnvironment;
+module.exports.prepareEnvironment = prepareEnvironment;
 module.exports.getDataOfFile = getDataOfFile;
+module.exports.fsStub = {
+    readFileSync: function() {}
+};
+

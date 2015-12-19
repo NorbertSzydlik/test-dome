@@ -1,10 +1,10 @@
 {
   "name": "test-dome",
   "version": "0.0.1-alpha1",
-  "description": "Test dome allows you to create testing environment, separated from real HTTP, SQL, socket connection, or filesystem manipulation",
+  "description": "Test dome allows you to create testing environment, separated from real HTTP, socket connection, filesystem or childProcess",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "Norbert Szydlik",
   "license": "ISC",
@@ -12,9 +12,11 @@
     "chai": "^3.4.1",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.2.0",
-    "mocha": "^2.3.4"
+    "mocha": "^2.3.4",
+    "sinon": "^1.17.2"
   },
   "dependencies": {
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "proxyquire": "^1.7.3"
   }
 }
