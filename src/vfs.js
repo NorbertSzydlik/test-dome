@@ -2,8 +2,9 @@
 
 var _ = require("lodash");
 var assert = require("assert");
+var fsStub = require("./fsStub");
 
-var vfs = {};
+var vfs;
 
 function getBufferFromData(data) {
     if(Buffer.isBuffer(data)) {
@@ -21,6 +22,16 @@ function getBufferFromData(data) {
 }
 
 function prepareEnvironment(options) {
+    vfs = {};
+    if(_.has(options, "enabled") && options.enabled.vfs) {
+        var fs = require("fs");
+
+        fs.__originalFunctions = {};
+        _.forEach(fsStub.stub, function(stubFunction, functionName) {
+            fs.__originalFunctions[functionName] = fs[functionName];
+            fs[functionName] = stubFunction;
+        });
+    }
     if(_.has(options, "vfs")) {
         _.forEach(options.vfs, function(file, absolutePath) {
             vfs[absolutePath] = {};
@@ -28,6 +39,7 @@ function prepareEnvironment(options) {
             storedFile.data = getBufferFromData(file.data);
         });
     }
+    fsStub.prepareEnvironment(options, vfs);
 }
 
 function getDataOfFile(absolutePath, encoding) {
@@ -39,7 +51,5 @@ function getDataOfFile(absolutePath, encoding) {
 
 module.exports.prepareEnvironment = prepareEnvironment;
 module.exports.getDataOfFile = getDataOfFile;
-module.exports.fsStub = {
-    readFileSync: function() {}
-};
+module.exports.fsStub = fsStub.stub;
 

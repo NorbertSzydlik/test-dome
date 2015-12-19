@@ -1,3 +1,5 @@
+"use strict";
+
 var vfs = require("../../src/vfs");
 var expect = require("chai").expect;
 

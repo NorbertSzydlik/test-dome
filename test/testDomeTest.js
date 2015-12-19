@@ -1,3 +1,5 @@
+"use strict";
+
 var testDome = require("../index");
 var expect = require("chai").expect;
 var sinon = require("sinon");

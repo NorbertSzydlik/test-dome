@@ -1,3 +1,5 @@
+"use strict";
+
 var vfs = require("./src/vfs");
 var path = require("path");
 var proxyquire = require("proxyquire").noCallThru();
@@ -11,7 +13,7 @@ function enclose(modulePath, options) {
         }
     }
 
-    var moduleUT = proxyquire(path.join(path.dirname(module.parent.filename), modulePath), requireStubs);
+    var moduleUT = require(path.join(path.dirname(module.parent.filename), modulePath));
     vfs.prepareEnvironment(options);
     return moduleUT;
 }
